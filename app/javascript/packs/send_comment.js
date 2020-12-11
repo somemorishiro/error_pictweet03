@@ -5,16 +5,14 @@ function send_comment() {
   comment_form_button.addEventListener("click", (e) => {
     e.preventDefault();
 
-
     const formData = new FormData(comment_form);
     const XHR = new XMLHttpRequest();
-    const url = location.pathname + "/comment"
-
+    const url = location.pathname + "/comments";
     XHR.open("POST", url, true);
     XHR.responseType = "json";
     XHR.send(formData);
     XHR.onload = () => {
-
+      
       if (XHR.status != 200) {
         alert(`Error ${XHR.status}: ${XHR.statusText}`);
         return null;
@@ -23,11 +21,11 @@ function send_comment() {
       const comment = XHR.response.comment;
       const name = XHR.response.user_name;
       const comments_area = document.getElementsByClassName("comments")[0];
-
+      console.log(comment)
       const HTML = `
           <p>
           <strong><a href="/users/1">${name}</a>：</strong>
-          ${comment}
+          ${comment.text}
         </p>
         `;
       comments_area.insertAdjacentHTML("beforeend", HTML);

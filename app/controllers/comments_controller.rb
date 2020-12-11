@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   def create
     comment = Comment.create(comment_params)
-    render json:{ comment: comment, user_name: comment.user.name }
+    render json:{ comment: comment, user_name: comment.user.nickname }
     # redirect_to "/tweets/#{comment.tweet.id}"   #コメントと結びつくツイートの詳細画面に遷移する
   end
 
